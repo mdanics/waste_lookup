@@ -22,7 +22,7 @@ class Result extends Component {
     return (
       <div className="flex-grid">
         <div className="col">
-          <i className={((this.props.isFavourited) ? "favourited" : "ee") + " fa fa-star"}  onClick={ () => {
+          <i className={((this.props.isFavourited) ? "favourited" : "unfavourited") + " fa fa-star"}  onClick={ () => {
             this.favourite()
           }}/>
 
