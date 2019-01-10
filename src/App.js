@@ -1,25 +1,166 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Result from "./result";
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchValue: "",
+      results: [],
+      favourites: [],
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+
+  handleSubmit(evt) {
+    this.search().then(data => console.log(data));
+
+    evt.preventDefault();
+  }
+
+
+  updateSearchValue(evt) {
+    this.setState({
+      searchValue: evt.target.value
+    });
+
+    this.clearSearchResultsIfEmpty(evt.target.value);
+  }
+
+
+  clearSearchResultsIfEmpty(text) {
+    if (text.length === 0){
+      this.setState({
+        results: []
+      })
+    }
+  }
+
+  async getJson() {
+    try {
+      let resp = await fetch("https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000");
+      let respJson = await resp.json();
+      return respJson
+    } catch(error) {
+      console.error("Error getting waste data: ", error)
+    }
+  }
+
+  async search() {
+
+    let json = await this.getJson();
+
+    const normalizedSearch = this.state.searchValue.toLowerCase();
+
+    let results = json.filter(
+      obj => {
+        return (obj.keywords.toLowerCase().includes(normalizedSearch))
+      }
+    );
+
+    this.setState({
+      results: results
+    });
+    console.log(results)
+  }
+
+
+  favourite = (id) => {
+    let resultToFavourite = this.state.results[id];
+
+    // ensures that result is not already favourited
+    if (!this.isFavourited(resultToFavourite.title)){
+
+      let updatedFavs = this.state.favourites;
+
+      updatedFavs.push(resultToFavourite);
+
+      this.setState({
+          favourites: updatedFavs
+        }
+      )
+    } else {
+      this.unfavouriteByTitle(resultToFavourite.title)
+    }
+  };
+
+  unfavouriteByTitle = (title) => {
+    let updatedFavs = this.state.favourites.filter(obj => {
+      return obj.title !== title
+    });
+
+    this.setState({
+      favourites: updatedFavs
+    })
+  };
+
+  unfavouriteByIndex = (index) => {
+    let updatedFavs = this.state.favourites;
+    updatedFavs.splice(index, 1);
+
+    this.setState({
+      favourites: updatedFavs
+    })
+  };
+
+  isFavourited(title) {
+    let results = this.state.favourites.filter(obj => {
+      return obj.title === title
+    });
+
+    return results.length === 1
+  }
+
+
   render() {
+    const buildResults = (resultData, favouriteMethod) => {
+      return resultData.map((result, index) => {
+        
+        return <Result title={result.title} body={result.body} key={index} id={index} favouriteMethod={favouriteMethod}
+                       isFavourited={this.isFavourited(result.title)}
+        />
+      });
+    };
+
+    let resultItems = buildResults(this.state.results, this.favourite);
+
+    let favouriteItems = buildResults(Object.values(this.state.favourites), this.unfavouriteByIndex);
+
+    let favourites = <div/>;
+    if (favouriteItems.length !== 0){
+      favourites =
+        <div className="favourites">
+          <div className="container">
+            <h2>
+              Favourites
+            </h2>
+            {favouriteItems}
+          </div>
+        </div>
+    }
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+          <header className="header">
+          Toronto Waste Lookup
+          </header>
+          <div className="container">
+
+            <form onSubmit={this.handleSubmit}>
+              <input className="search-bar" type="text" name="search" value={this.state.searchValue} onChange={evt => this.updateSearchValue(evt)}/>
+              <button type="submit" className="search-btn"><i className="fa fa-search fa-flip-horizontal"> </i></button>
+            </form>
+          </div>
+
+          <div className="results container">
+            {resultItems}
+          </div>
+
+          {favourites}
       </div>
     );
   }
