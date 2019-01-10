@@ -67,6 +67,10 @@ form {
   flex: 1;
 }
 
+.container {
+    margin: 0 20% 0 20%;
+}
+
 .container ul {
     margin: 0 0 0 0;
 }
@@ -95,10 +99,6 @@ form {
     padding: 2vh 0 2.5vh 0;
 }
 
-.container {
-    margin: 0 20% 0 20%;
-}
-
 .directions {
     margin: 0;
 }
@@ -122,4 +122,10 @@ form {
 
 .unfavourited:hover {
     color: #9b9b9b;
+}
+
+@media only screen and (max-width: 700px){
+    .container {
+        margin: 0 5% 0 5%;
+    }
 }
