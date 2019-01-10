@@ -25,8 +25,13 @@ form {
     line-height: normal;
     max-height: 3em;
 
+    padding: 10px;
 
     flex: 10 0 250px;
+}
+
+.search-bar:focus {
+    outline: none;
 }
 
 .search-btn {
