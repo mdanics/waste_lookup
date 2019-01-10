@@ -135,9 +135,9 @@ class App extends Component {
       favourites =
         <div className="favourites">
           <div className="container">
-            <h2>
+            <div className="title">
               Favourites
-            </h2>
+            </div>
             {favouriteItems}
           </div>
         </div>
@@ -159,7 +159,6 @@ class App extends Component {
           <div className="results container">
             {resultItems}
           </div>
-
           {favourites}
       </div>
     );

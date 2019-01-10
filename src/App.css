@@ -1,6 +1,6 @@
 .header {
   text-align: center;
-  font-size: 3vw;
+  font-size: 2em;
   color: white;
   font-weight: bold;
   background-image: linear-gradient(-30deg, #23955f, #1d5796);
@@ -11,7 +11,7 @@ form {
     display: flex;
     flex-wrap: wrap;
     /*width: 85%;*/
-    margin: 2vh auto;
+    margin: 18px auto;
     padding-bottom: 4vh;
 }
 
@@ -20,7 +20,7 @@ form {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 1.8em;
+    font-size: 1.4em;
     text-decoration: none;
     line-height: normal;
     max-height: 3em;
@@ -43,11 +43,11 @@ form {
     color: white;
     border: none;
     cursor: pointer;
-    margin-left: 1vw;
+    margin-left: 18px;
     height: 2em;
     width: 2em;
     border-radius: 3px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     transition: 200ms;
 }
 
@@ -67,30 +67,36 @@ form {
   flex: 1;
 }
 
-.results ul {
-    margin: 0 0 6vh 0;
+.container ul {
+    margin: 0 0 0 0;
 }
 
-.results li {
+.container li {
     margin: 0 0 2vh 0;
+}
+
+.container .col {
+    margin-bottom: 6vh
+}
+
+.container ul {
+    -webkit-padding-start: 0;
 }
 
 .favourites {
     background-color: #f7fefa
 }
 
-.favourites h2 {
-    color: #2b985e;
-    font-size: 2em;
-    font-weight: bold;
 
+.favourites .container .title {
+    color: #2b985e;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 2vh 0 2.5vh 0;
 }
 
 .container {
     margin: 0 20% 0 20%;
-    /*margin-left: 20%;*/
-    /*margin-right: 20%;*/
-    /*border: darkgrey 1px solid;*/
 }
 
 .directions {
