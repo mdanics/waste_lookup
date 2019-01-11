@@ -6,15 +6,20 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+
+    let favourites = [];
+    if (localStorage.hasOwnProperty("favourites")){
+      favourites = JSON.parse(localStorage.getItem("favourites"))
+    }
+
     this.state = {
       searchValue: "",
       results: [],
-      favourites: [],
+      favourites: favourites,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
 
   handleSubmit(evt) {
     this.search().then(data => console.log(data));
@@ -86,6 +91,8 @@ class App extends Component {
     } else {
       this.unfavouriteByTitle(resultToFavourite.title)
     }
+
+    this.saveFavouritesToLocalStorage();
   };
 
   unfavouriteByTitle = (title) => {
@@ -95,7 +102,9 @@ class App extends Component {
 
     this.setState({
       favourites: updatedFavs
-    })
+    });
+
+    this.saveFavouritesToLocalStorage();
   };
 
   unfavouriteByIndex = (index) => {
@@ -104,7 +113,9 @@ class App extends Component {
 
     this.setState({
       favourites: updatedFavs
-    })
+    });
+
+    this.saveFavouritesToLocalStorage();
   };
 
   isFavourited(title) {
@@ -115,6 +126,9 @@ class App extends Component {
     return results.length === 1
   }
 
+  saveFavouritesToLocalStorage() {
+    localStorage.setItem("favourites", JSON.stringify(this.state.favourites))
+  }
 
   render() {
     const buildResults = (resultData, favouriteMethod) => {
