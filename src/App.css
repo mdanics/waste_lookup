@@ -4,7 +4,7 @@
   color: white;
   font-weight: bold;
   background-image: linear-gradient(-30deg, #23955f, #1d5796);
-  padding: 20px 0 20px 0;
+  padding: 32px 0 32px 0;
 }
 
 form {
@@ -67,10 +67,13 @@ form {
   flex: 1;
 }
 
-.container {
-    margin: 0 20% 0 20%;
+.card {
+    margin: 0 8% 0 8%;
 }
 
+.container{
+    padding: 16px
+}
 .container ul {
     margin: 0 0 0 0;
 }
@@ -124,8 +127,14 @@ form {
     color: #9b9b9b;
 }
 
-@media only screen and (max-width: 700px){
-    .container {
-        margin: 0 5% 0 5%;
+@media only screen and (max-width: 900px){
+    .card {
+        margin: 0;
+    }
+}
+
+@media only screen and (min-width: 900px){
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     }
 }

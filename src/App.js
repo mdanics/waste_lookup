@@ -158,7 +158,7 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
+      <div className="App card">
           <header className="header">
           Toronto Waste Lookup
           </header>
