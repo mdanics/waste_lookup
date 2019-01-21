@@ -48,8 +48,8 @@ class App extends Component {
 
   async getJson() {
     try {
-      let resp = await fetch("https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000").json();
-      return resp
+      let resp = await fetch("https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000");
+      return resp.json()
     } catch(error) {
       console.error("Error getting waste data: ", error)
     }
@@ -58,7 +58,7 @@ class App extends Component {
   async search() {
     // searches based on a match between search value and toronto waste keywords
 
-    let json = await this.getJson();
+    const json = await this.getJson();
 
     const normalizedSearch = this.state.searchValue.toLowerCase();
 
