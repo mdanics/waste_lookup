@@ -86,13 +86,14 @@ class App extends Component {
 
       this.setState({
           favourites: updatedFavs
-        }
-      )
+        });
+
+      this.saveFavouritesToLocalStorage(updatedFavs);
+
     } else {
       this.unfavouriteByTitle(resultToFavourite.title)
     }
 
-    this.saveFavouritesToLocalStorage();
   };
 
   unfavouriteByTitle = (title) => {
@@ -104,7 +105,7 @@ class App extends Component {
       favourites: updatedFavs
     });
 
-    this.saveFavouritesToLocalStorage();
+    this.saveFavouritesToLocalStorage(updatedFavs);
   };
 
   unfavouriteByIndex = (index) => {
@@ -115,7 +116,7 @@ class App extends Component {
       favourites: updatedFavs
     });
 
-    this.saveFavouritesToLocalStorage();
+    this.saveFavouritesToLocalStorage(updatedFavs);
   };
 
   isFavourited(title) {
@@ -126,8 +127,8 @@ class App extends Component {
     return results.length === 1
   }
 
-  saveFavouritesToLocalStorage() {
-    localStorage.setItem("favourites", JSON.stringify(this.state.favourites))
+  saveFavouritesToLocalStorage(favourites) {
+    localStorage.setItem("favourites", JSON.stringify(favourites))
   }
 
   render() {
@@ -158,7 +159,7 @@ class App extends Component {
     }
 
     return (
-      <div className="App card">
+      <div className="App">
           <header className="header">
           Toronto Waste Lookup
           </header>
