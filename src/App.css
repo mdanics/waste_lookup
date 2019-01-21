@@ -10,9 +10,6 @@
 form {
     display: flex;
     flex-wrap: wrap;
-    /*width: 85%;*/
-    margin: 18px auto;
-    padding-bottom: 4vh;
 }
 
 .search-bar {
@@ -67,12 +64,9 @@ form {
   flex: 1;
 }
 
-.card {
-    margin: 0 8% 0 8%;
-}
-
 .container{
-    padding: 16px
+    padding: 16px;
+    margin: 0 8% 0 8%;
 }
 .container ul {
     margin: 0 0 0 0;
@@ -88,6 +82,10 @@ form {
 
 .container ul {
     -webkit-padding-start: 0;
+}
+
+.results .col {
+    display: list-item;
 }
 
 .favourites {
@@ -128,13 +126,10 @@ form {
 }
 
 @media only screen and (max-width: 900px){
-    .card {
+    .container {
         margin: 0;
     }
-}
-
-@media only screen and (min-width: 900px){
-    .card {
-      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    .container ul {
+    margin: 0 0 0 10%;
     }
 }
