@@ -28,7 +28,7 @@ class Result extends Component {
 
           {this.props.title}
         </div>
-        <div className="col" dangerouslySetInnerHTML={{__html: cleanBody}}>
+        <div className="col body" dangerouslySetInnerHTML={{__html: cleanBody}}>
 
         </div>
       </div>
