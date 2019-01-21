@@ -8,6 +8,7 @@ class App extends Component {
     super(props);
 
     let favourites = [];
+
     if (localStorage.hasOwnProperty("favourites")){
       favourites = JSON.parse(localStorage.getItem("favourites"))
     }
@@ -47,15 +48,15 @@ class App extends Component {
 
   async getJson() {
     try {
-      let resp = await fetch("https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000");
-      let respJson = await resp.json();
-      return respJson
+      let resp = await fetch("https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000").json();
+      return resp
     } catch(error) {
       console.error("Error getting waste data: ", error)
     }
   }
 
   async search() {
+    // searches based on a match between search value and toronto waste keywords
 
     let json = await this.getJson();
 

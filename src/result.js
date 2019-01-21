@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 
 class Result extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   favourite() {
     this.setState({favourited: true});
     this.props.favouriteMethod(this.props.id)
@@ -13,6 +9,7 @@ class Result extends Component {
 
   render() {
 
+    // body from Toronto Waste is not in clean HTML, this function fixes the response so that it can be rendered properly
     const cleanBody = this.props.body.replace(/&amp;/g, '&')
         .replace(/&lt;/g, '<')
         .replace(/&gt;/g, '>')
